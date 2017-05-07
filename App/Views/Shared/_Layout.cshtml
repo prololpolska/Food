@@ -1,0 +1,35 @@
+﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jedzenie - @ViewData["Title"]</title>
+    <link href='https://fonts.googleapis.com/css?family=Lora|Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="~/css/styl.css" />
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @Html.Raw(JavaScriptSnippet.FullScript)
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Jedzenie</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">Logowanie</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>2017 &copy; Tomasz Wojtkowski. Wszelkie prawa zatrzeżone </p>
+        </footer>
+    </div>
+</body>
+</html>
