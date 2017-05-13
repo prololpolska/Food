@@ -4,7 +4,7 @@ namespace Infrastrkture.Connections
 {
     abstract class BaseConnect
     {
-        public string ConnectionString = "server=localhost;user=user;password=user;database=ziemniaki;";
+        public string ConnectionString = "server=localhost;user=root;password=;database=ziemniaki;";
         
         protected MySqlConnection GetConnection()
         {

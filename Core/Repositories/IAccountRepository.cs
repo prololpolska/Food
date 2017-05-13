@@ -6,8 +6,8 @@ namespace Core.Repositories
     public interface IAccountRepository : IRepository
     {
         Task<Account> Get(int id);
+        Task<Account> Get(string  email);
         Task Add(Account account);
-        Task Update(int id, Account account);
-        Task Remove(int id);
+        Task<int> GetId();
     }
 }

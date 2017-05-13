@@ -1,0 +1,6 @@
+﻿@using App.Models;
+@model ForwardingModel
+<input type="submit" id="IsAccepted"  hidden asp-action="@Model.Input" />
+<script>
+    document.getElementById("IsAccepted").click();
+</script>

@@ -16,6 +16,7 @@ namespace Core.Domain
             UserName = userName;
             Email = email;
             Password = password;
+            DietEnd = DateTime.UtcNow.Date.AddSeconds(-1);
         }
         public Account()
         { }

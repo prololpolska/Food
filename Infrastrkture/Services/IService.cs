@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Infrastrkture.Services
 {
-    interface IService
+    public interface IService
     {
     }
 }

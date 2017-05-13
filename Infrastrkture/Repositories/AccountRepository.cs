@@ -1,30 +1,34 @@
 ﻿using Core.Repositories;
-using System;
 using Core.Domain;
 using System.Threading.Tasks;
+using Infrastrkture.Connections;
 
 namespace Infrastrkture.Repositories
 {
     public class AccountRepository : IAccountRepository
     {
-        public Task Add(Account account)
+        public async Task Add(Account account)
         {
-            throw new NotImplementedException();
+            var addAccount = new AddAccount();
+            addAccount.Add(account);
         }
 
-        public Task<Account> Get(int id)
+        public async Task<Account> Get(int id)
         {
-            throw new NotImplementedException();
+            var getAccount = new GetAccount();
+            return await getAccount.WhereId(id);
         }
 
-        public Task Remove(int id)
+        public async Task<Account> Get(string email)
         {
-            throw new NotImplementedException();
+            var getAccount = new GetAccount();
+            return await getAccount.WhereEmail(email);
         }
 
-        public Task Update(int id, Account account)
+        public async Task<int> GetId()
         {
-            throw new NotImplementedException();
+            var getMaxId = new GetMaxId();
+            return getMaxId.Get();
         }
     }
 }

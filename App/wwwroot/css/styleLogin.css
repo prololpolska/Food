@@ -1,0 +1,104 @@
+﻿body {
+    background: #333;
+}
+
+#form1 {
+    padding: 25px;
+    background: #728;
+    position: absolute;
+    top: 0px;
+    position: absolute;
+    left: 0px;
+    align-items: center;
+    backface-visibility: hidden;
+    height: 250px;
+    transition: 0.8s transform ease;
+    margin: 0px;
+}
+
+#form2 {
+    height: 250px;
+    padding: 25px;
+    background: #728;
+    position: absolute;
+    top: 0px;
+    position: absolute;
+    left: 0px;
+    align-items: center;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+    transition: 0.8s transform ease;
+    margin: 0px;
+}
+
+#squre {
+    position: absolute;
+    top: 50%;
+    position: absolute;
+    left: 50%;
+    height: 300px;
+    transform: translate(-50%, -50%);
+    width: 325px;
+    padding: 0px;
+}
+
+#change {
+    background: navy;
+    width: 100px;
+    height: 300px;
+    display: inline-flex;
+    position: absolute;
+    top: 0px;
+    position: absolute;
+    left: 225px;
+}
+
+#login {
+    width: 100px;
+    height: 150px;
+    background: yellow;
+    color: red;
+    position: absolute;
+    top: 0px;
+    position: absolute;
+    left: 0px;
+    transition: 0.8s ease;
+}
+
+#logon {
+    width: 100px;
+    height: 150px;
+    background: navy;
+    color: yellow;
+    position: absolute;
+    top: 50%;
+    position: absolute;
+    left: 0px;
+    transition: 0.8s ease;
+}
+
+button {
+    border-radius: 80%;
+}
+
+input {
+    border-radius: 10px;
+}
+
+.change {
+    position: absolute;
+    top: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-family: 'Lobster', cursive;
+}
+
+form {
+    width: 175px;
+}
+.Error{
+    color:yellow;
+    display:none;
+}

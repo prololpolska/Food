@@ -1,0 +1,52 @@
+﻿@using App.Models;
+@{
+    ViewData["Title"] = "Logowanie";
+}
+@model LoginModel
+<link rel="stylesheet" href="~/css/styleLogin.css" />
+<script src="~/js/scriptLogin.js"></script>
+<div id="squre">
+    <div id="form">
+        <div id="form1">
+            <span id="LoginError" class="Error">Wypełnij wszyskie pola</span>
+            <form method="post" asp-controller="Home" id="1" name="1">
+                <p>
+                    <label for="email" required>E-mail:</label><br />
+                    <input type="email" asp-for="Email" id="email" required placeholder="user@email.com" minlength="6" />
+                </p>
+                <p>
+                    <label for="password">Hasło:</label><br />
+                    <input type="password" asp-for="Password" id="password" required maxlength="16" minlength="8" />
+                </p>
+                <input type="submit" id="LoginSubmit" hidden asp-action="LoginProcessing" />
+            </form>
+            <button id="Login" onclick="LoginValidationNameSpace.LoginClick();">Loguj</button>
+        </div>
+        <div id="form2">
+            <span id="LogonError" class="Error">Wypełnij wszyskie pola</span>
+            <form method="post" asp-controller="Home" id="2" name="2">
+                <p>
+                    <label for="userNameR">Nazwa użytkownika:</label><br />
+                    <input type="text" asp-for="UserNameR" id="userNameR" required placeholder="user" maxlength="16" minlength="4" />
+                </p>
+                <p>
+                    <label for="emailR">E-mail:</label><br />
+                    <input type="email" asp-for="EmailR" id="emailR" required placeholder="user@email.com" minlength="6" />
+                </p>
+                <p>
+                    <label for="passwordR">Hasło:</label><br />
+                    <input type="password" asp-for="PasswordR" id="passwordR" required maxlength="16" minlength="8" />
+                </p>
+                <p>
+                    <input type="checkbox" asp-for="CheckBoxR" id="checkboxR" required /><label for="checkboxR">Akceptuję regulamin</label>
+                </p>
+                <input type="submit" id="LogonSubmit" hidden asp-action="LogonProcessing" />
+            </form>
+            <button type="submit" onclick="LoginValidationNameSpace.LogonClick();">Rejestruj</button>
+        </div>
+    </div>
+    <div id="change">
+        <div id="login" onclick="LoginLookNameSpace.LoginClick();" onmousemove="LoginLookNameSpace.Login();" onmouseout="LoginLookNameSpace.LoginOut();"><span class="change">Zaloguj się</span></div>
+        <div id="logon" onclick="LoginLookNameSpace.LogonClick();" onmousemove="LoginLookNameSpace.Logon();" onmouseout="LoginLookNameSpace.LogonOut();"><span class="change">Zarejestruj się</span></div>
+    </div>
+</div>
