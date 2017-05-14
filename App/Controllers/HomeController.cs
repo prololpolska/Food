@@ -6,6 +6,7 @@ using Infrastrkture.Commands.Accounts;
 using Infrastructure.DTO;
 using App.Models;
 using Microsoft.Extensions.Caching.Memory;
+using System;
 
 namespace App.Controllers
 {
@@ -88,10 +89,48 @@ namespace App.Controllers
             currentUser = _memoryCache.Get<AccountDTO>("accountDto");
             if(currentUser == null)
             {
-                return View(StatusCode(403));
+                return StatusCode(403);
             }
+            if(currentUser.Role == "Admin")
+            {
+                ViewData.Add("accountRole.action", "Admin");
+                ViewData.Add("accountRole.info", "Dodaj dietę");
+            }
+            else
+            {
 
+                ViewData.Add("accountRole.action", "Buy");
+                ViewData.Add("accountRole.info", "Kup dietę");
+            }
             ViewData["Message"] = $"Witaj {currentUser.UserName}";
+            return View();
+        }
+
+        public async Task<IActionResult> Buy()
+        {
+            ViewData.Add("sharedModel.accountOrLogin", _sharedModel.accountOrLogin);
+            ViewData.Add("sharedModel.accountOrLoginTarget", _sharedModel.accountOrLoginTarget);
+            currentUser = _memoryCache.Get<AccountDTO>("accountDto");
+            if (currentUser == null)
+            {
+                return StatusCode(403);
+            }
+            return View();
+        }
+
+        public async Task<IActionResult> Admin()
+        {
+            ViewData.Add("sharedModel.accountOrLogin", _sharedModel.accountOrLogin);
+            ViewData.Add("sharedModel.accountOrLoginTarget", _sharedModel.accountOrLoginTarget);
+            currentUser = _memoryCache.Get<AccountDTO>("accountDto");
+            if (currentUser == null)
+            {
+                return StatusCode(403);
+            }
+            if(currentUser.Role != "Admin")
+            {
+                return StatusCode(403);
+            }
             return View();
         }
     }
