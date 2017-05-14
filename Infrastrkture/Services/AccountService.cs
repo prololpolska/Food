@@ -1,7 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Infrastructure.DTO;
-using Infrastrkture.Repositories;
 using AutoMapper;
 using Core.Repositories;
 using Core.Domain;
@@ -13,7 +11,6 @@ namespace Infrastrkture.Services
         private readonly IAccountRepository _accountRepository;
         private readonly IEncrypter _encrypter;
         private readonly IMapper _mapper;
-        private Account CurrentAccount { get;  set; }
 
         public AccountService(IAccountRepository accountRepository, IEncrypter encrypter, IMapper mapper)
         {
@@ -25,8 +22,7 @@ namespace Infrastrkture.Services
         public async Task<AccountDTO> Login(string email, string password)
         {
             var account = await _accountRepository.Get(email);
-            var salt = _encrypter.GetSalt(password);
-            var hash = _encrypter.GetHash(password, salt);
+            var hash = _encrypter.GetHash(password, account.Salt);
             if (account.Password == hash)
             {
                 return await Map(account);
@@ -46,7 +42,7 @@ namespace Infrastrkture.Services
             int id = await _accountRepository.GetId() + 1;
             var salt = _encrypter.GetSalt(password);
             var hash = _encrypter.GetHash(password, salt);
-            var account = new Account(id, userName, email, hash);
+            var account = new Account(id, userName, email, hash, salt, "User");
             if(account == null)
             {
                 return null;

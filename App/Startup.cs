@@ -1,7 +1,4 @@
 ﻿using System;
-using Infrastrkture.IOC.Modules;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -10,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Infrastrkture.IOC;
+using App.Models;
 
 namespace App
 {
@@ -35,10 +33,11 @@ namespace App
             services.AddMvc();
 
             var builder = new ContainerBuilder();
+            builder.RegisterInstance(new SharedModel()).SingleInstance();
             builder.Populate(services);
             builder.RegisterModule(new ContainerModule(Configuration));
             ApplicationContainer = builder.Build();
-
+            
             return new AutofacServiceProvider(ApplicationContainer);
         }
 

@@ -1,4 +1,5 @@
 ﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+@using App.Models;
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -18,7 +19,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Login">Logowanie</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action=@ViewData["sharedModel.accountOrLoginTarget"]>@ViewData["sharedModel.accountOrLogin"]</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
             </div>

@@ -26,7 +26,9 @@ namespace Infrastrkture.Connections
                             UserName = reader.GetString("userName"),
                             DietEnd = reader.GetDateTime("dietEnd"),
                             Password = reader.GetString("paswd"),
-                            Email = reader.GetString("email")
+                            Email = reader.GetString("email"),
+                            Salt = reader.GetString("salt"),
+                            Role = reader.GetString("role")
                         };
                     }
                 }
@@ -51,7 +53,9 @@ namespace Infrastrkture.Connections
                             UserName = reader.GetString("userName"),
                             DietEnd = reader.GetDateTime("dietEnd"),
                             Password = reader.GetString("paswd"),
-                            Email = reader.GetString("email")
+                            Email = reader.GetString("email"),
+                            Salt = reader.GetString("salt"),
+                            Role = reader.GetString("role")
                         };
                     }
                 }
