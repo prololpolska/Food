@@ -1,1 +1,20 @@
-﻿
+﻿@using App.Models;
+@model AdminModel
+<div id="AdminPageContent">
+    <button>Posiłek</button><button>Dieta</button><br/><br />
+    <div>
+        <div id="meal">
+            <form method="post" asp-controller="Home" id="1" name="1">
+                <textarea required asp-for="AddMeal"></textarea><br /><br />
+                <input type="submit" asp-action="AddMeal"/>
+            </form>
+        </div>
+        <div id="diet">
+            <form method="post" asp-controller="Home" id="2" name="2">
+                <input type="date" min="@DateTime.UtcNow.Date" maxlength="10" placeholder="rrrr-mm-dd" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" asp-for="Date"/><br /><br />
+                <select asp-for="Meal"></select><br /><br />
+                <input type="submit" asp-action="AddDiet"/>
+            </form>
+        </div>
+    </div>
+</div>

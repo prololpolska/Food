@@ -28,22 +28,22 @@ create table Accounts
 
 create table Days
 (
-	id tinyint not null primary key,
+	id integer not null primary key,
     nameDay varchar(16) not null,
     dateDay dateTime not null
 );
 
 create table Meals
 (
-	id tinyint not null primary key,
+	id smallint not null primary key,
     items text not null
 );
 
 create table MealDayConnector
 (
-	id smallint not null primary key,
-    dayId tinyint not null,
-    mealId tinyint not null
+	id bigint not null primary key,
+    dayId integer not null,
+    mealId smallint not null
 );
 
 /*creating constraints*/
@@ -54,4 +54,4 @@ alter table MealDayConnector add constraint c_fkDay foreign key c_fkDay(dayId) r
 alter table MealDayConnector add constraint c_fkMeal foreign key c_fkDay(mealId) references Meals(id) on update restrict on delete restrict;
 
 select * from accounts;
-insert into Accounts values (1, "Tomasz Wojtkowski", "Admin", "PxdgfbCtshXNKnefhpL0cY+0/M2bgF5uOw+1iHX5B+qdjdAP5B5z3A==", "admin@email.com", "i0jN+tYevuD/SFpiwBoQJT91PpJi2u/dtJZICO+C1AywWVZGnrd9/w==", "Admin", '2017-12-30 00:00:00');
+insert into Accounts values (1, "Tomasz Wojtkowski", "Admin", "PxdgfbCtshXNKnefhpL0cY+0/M2bgF5uOw+1iHX5B+qdjdAP5B5z3A==", "admin@email.com", "i0jN+tYevuD/SFpiwBoQJT91PpJi2u/dtJZICO+C1AywWVZGnrd9/w==", "Admin", '2100-12-30 00:00:00');

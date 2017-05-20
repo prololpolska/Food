@@ -133,5 +133,22 @@ namespace App.Controllers
             }
             return View();
         }
+
+        public async Task<IActionResult> AddMeal(AdminModel Model)
+        {
+            ViewData.Add("sharedModel.accountOrLogin", _sharedModel.accountOrLogin);
+            ViewData.Add("sharedModel.accountOrLoginTarget", _sharedModel.accountOrLoginTarget);
+            //await _CommandDispatcher.Dispatch();
+            return View();
+        }
+
+        public async Task<IActionResult> AddDiet(AdminModel Model)
+        {
+            ViewData.Add("sharedModel.accountOrLogin", _sharedModel.accountOrLogin);
+            ViewData.Add("sharedModel.accountOrLoginTarget", _sharedModel.accountOrLoginTarget);
+            
+            //await _CommandDispatcher.Dispatch();
+            return View();
+        }
     }
 }

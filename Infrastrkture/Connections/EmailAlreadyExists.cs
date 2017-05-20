@@ -3,15 +3,15 @@ using System.Threading.Tasks;
 
 namespace Infrastrkture.Connections
 {
-    class UserNameAlreadyExists : BaseConnect
+    class EmailAlreadyExists : BaseConnect
     {
-        public async Task<bool> Exist(string p_UserName)
+        public async Task<bool> Exist(string p_Email)
         {
             bool exist = false;
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                var cmd = new MySqlCommand($"SELECT count(id) as item FROM Accounts where userName = \"{p_UserName}\"", conn);
+                var cmd = new MySqlCommand($"SELECT count(id) as item FROM Accounts where email = \"{p_Email}\"", conn);
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())

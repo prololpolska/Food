@@ -2,7 +2,6 @@
 using Infrastrkture.Commands.Accounts;
 using Infrastrkture.Services;
 using Microsoft.Extensions.Caching.Memory;
-using System;
 using System.Threading.Tasks;
 
 namespace Infrastrkture.Handlers.Accounts

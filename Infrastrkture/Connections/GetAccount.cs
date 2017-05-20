@@ -11,6 +11,7 @@ namespace Infrastrkture.Connections
     {
         public async Task<Account> WhereEmail(string p_Email)
         {
+            Account account = null;
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
@@ -19,7 +20,7 @@ namespace Infrastrkture.Connections
                 {
                     while (reader.Read())
                     {
-                        return new Account()
+                        account = new Account()
                         {
                             Id = reader.GetInt32("id"),
                             FullName = reader.GetString("fullName"),
@@ -32,12 +33,14 @@ namespace Infrastrkture.Connections
                         };
                     }
                 }
+                conn.Close();
             }
-            return null;
+            return account;
         }
 
         public async Task<Account> WhereId(int p_Id)
         {
+            Account account = null;
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
@@ -46,7 +49,7 @@ namespace Infrastrkture.Connections
                 {
                     while (reader.Read())
                     {
-                        return new Account()
+                        account = new Account()
                         {
                             Id = reader.GetInt32("id"),
                             FullName = reader.GetString("fullName"),
@@ -59,8 +62,9 @@ namespace Infrastrkture.Connections
                         };
                     }
                 }
+                conn.Close();
             }
-            return null;
+            return account;
         }
     }
 }

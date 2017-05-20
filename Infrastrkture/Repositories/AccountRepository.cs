@@ -2,6 +2,7 @@
 using Core.Domain;
 using System.Threading.Tasks;
 using Infrastrkture.Connections;
+using System;
 
 namespace Infrastrkture.Repositories
 {
@@ -10,7 +11,11 @@ namespace Infrastrkture.Repositories
         public async Task Add(Account account)
         {
             var addAccount = new AddAccount();
-            addAccount.Add(account);
+            int added = await addAccount.Add(account);
+            if(added == 0)
+            {
+                throw new Exception();
+            }
         }
 
         public async Task<Account> Get(int id)
@@ -28,7 +33,7 @@ namespace Infrastrkture.Repositories
         public async Task<int> GetId()
         {
             var getMaxId = new GetMaxId();
-            return getMaxId.Get();
+            return getMaxId.Get("Accounts");
         }
     }
 }

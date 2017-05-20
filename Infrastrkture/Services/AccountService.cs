@@ -3,6 +3,7 @@ using Infrastructure.DTO;
 using AutoMapper;
 using Core.Repositories;
 using Core.Domain;
+using Infrastrkture.Connections;
 
 namespace Infrastrkture.Services
 {
@@ -39,11 +40,21 @@ namespace Infrastrkture.Services
 
         public async Task<AccountDTO> Add(string userName, string email, string password)
         {
+            var emailAlreadyExists = new EmailAlreadyExists();
+            var userNameAlreadyExists = new UserNameAlreadyExists();
             int id = await _accountRepository.GetId() + 1;
             var salt = _encrypter.GetSalt(password);
             var hash = _encrypter.GetHash(password, salt);
             var account = new Account(id, userName, email, hash, salt, "User");
             if(account == null)
+            {
+                return null;
+            }
+            if(await emailAlreadyExists.Exist(account.Email))
+            {
+                return null;
+            }
+            if (await userNameAlreadyExists.Exist(account.UserName))
             {
                 return null;
             }

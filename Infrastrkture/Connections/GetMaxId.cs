@@ -4,21 +4,23 @@ namespace Infrastrkture.Connections
 {
     class GetMaxId : BaseConnect
     {
-        public int Get()
+        public int Get(string from)
         {
+            int id = 0;
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                var cmd = new MySqlCommand("select Max(id) as m from Accounts;", conn);
+                var cmd = new MySqlCommand($"select coalesce(Max(id), 0) as m from {from} Accounts;", conn);
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        return reader.GetInt32(reader.GetOrdinal("m"));
+                        id = reader.GetInt32(reader.GetOrdinal("m"));
                     }
                 }
+                conn.Close();
             }
-            return 0;
+            return id;
         }
     }
 }
