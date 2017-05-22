@@ -12,9 +12,8 @@ namespace Core.Domain
         public string Email { get; set; }
         public string Salt { get; set; }
         public string Role { get; set; }
-        public Account(int id, string userName, string email, string password, string salt, string role)
+        public Account(string userName, string email, string password, string salt, string role)
         {
-            Id = id;
             UserName = userName;
             Email = email;
             Password = password;

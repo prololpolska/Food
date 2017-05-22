@@ -1,11 +1,16 @@
-﻿using System;
-
-namespace Core.Domain
+﻿namespace Core.Domain
 {
     public class MealDay
     {
-        public long Id { get; set; }
-        public DateTime Date { get; set; }
-        public short MealId { get; set; }
+        public long Id { get; private set; }
+        public int DateId { get; private set; }
+        public short MealId { get; private set; }
+
+        public MealDay(long id, int dateId, short mealId)
+        {
+            Id = id;
+            DateId = dateId;
+            MealId = mealId;
+        }
     }
 }

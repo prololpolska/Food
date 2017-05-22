@@ -14,7 +14,7 @@ namespace Infrastrkture.Repositories
             int added = await addAccount.Add(account);
             if(added == 0)
             {
-                throw new Exception();
+                throw new Exception("Nie można dodać użytkownika");
             }
         }
 
@@ -28,12 +28,6 @@ namespace Infrastrkture.Repositories
         {
             var getAccount = new GetAccount();
             return await getAccount.WhereEmail(email);
-        }
-
-        public async Task<int> GetId()
-        {
-            var getMaxId = new GetMaxId();
-            return getMaxId.Get("Accounts");
         }
     }
 }

@@ -8,6 +8,5 @@ namespace Core.Repositories
         Task<Account> Get(int id);
         Task<Account> Get(string  email);
         Task Add(Account account);
-        Task<int> GetId();
     }
 }

@@ -8,7 +8,7 @@ namespace Infrastrkture.Services
 {
     class DietService : IDietService
     {
-        public async Task AddDiet(MealDay mealDay)
+        public async Task AddDiet(short mealId, int dateId)
         {
             throw new NotImplementedException();
         }

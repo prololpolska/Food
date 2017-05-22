@@ -19,7 +19,8 @@ namespace Infrastrkture.Handlers.Accounts
 
         public async Task Handle(AddAccount command)
         {
-            _memoryCache.Set("accountDto", await _accountService.Add(command.Username, command.Email, command.Password));
+            await _accountService.Add(command.Username, command.Email, command.Password);
+            _memoryCache.Set("accountDto", await _accountService.Login(command.Email, command.Password));
         }
     }
 }

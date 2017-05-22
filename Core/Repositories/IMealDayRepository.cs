@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Core.Repositories
 {
-    interface IMaelDayRepository : IRepository
+    public interface IMealDayRepository : IRepository
     {
         Task<MealDay> Get(DateTime date);
         Task Add(MealDay mealDay);

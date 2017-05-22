@@ -12,7 +12,7 @@ namespace Infrastrkture.Services
         Task<Dictionary<int, string>> GetMeals();
         Task<Dictionary<int, DateTime>> GetDate();
         Task<int> GetDateId(DateTime date);
-        Task AddDiet(MealDay mealDay);
+        Task AddDiet(short mealId, int dateId);
         Task<List<MealDayDTO>> GetDiet();
         Task<MealDayDTO> Map(MealDay mealDay);
     }
