@@ -36,7 +36,7 @@ namespace Infrastrkture.Connections
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                var cmd = new MySqlCommand($"select * from Days where dateDay >= {firs} and id <= {last}", conn);
+                var cmd = new MySqlCommand($"select * from Days where dateDay >= {firs} and id <= {last} order by dateDay asc", conn);
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -50,6 +50,25 @@ namespace Infrastrkture.Connections
                 conn.Close();
             }
             return pair;
+        }
+
+        public async Task<int> Get(DateTime date)
+        {
+            int id = 0;
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                var cmd = new MySqlCommand($"select * from Days where dateDay = {date}", conn);
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        id = reader.GetInt32("id");
+                    }
+                }
+                conn.Close();
+            }
+            return id;
         }
     }
 }

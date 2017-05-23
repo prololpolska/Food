@@ -1,14 +1,15 @@
 ﻿using Core.Domain;
 using MySql.Data.MySqlClient;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Infrastrkture.Connections
 {
     class GetMealDay : BaseConnect
     {
-        public async Task<MealDay> Get(int dateId)
+        public async Task<List<MealDay>> Get(int dateId)
         {
-            MealDay mealDay = null;
+            List<MealDay> mealDay = null;
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
@@ -17,11 +18,11 @@ namespace Infrastrkture.Connections
                 {
                     while (reader.Read())
                     {
-                        mealDay = new MealDay(
+                        mealDay.Add(new MealDay(
                             reader.GetInt64("id"),
                             reader.GetInt32("dayId"),
                             reader.GetInt16("mealId")
-                            );
+                            ));
                     }
                 }
                 conn.Close();

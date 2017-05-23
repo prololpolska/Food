@@ -14,6 +14,6 @@ namespace Infrastrkture.Services
         Task<int> GetDateId(DateTime date);
         Task AddDiet(short mealId, int dateId);
         Task<List<MealDayDTO>> GetDiet();
-        Task<MealDayDTO> Map(MealDay mealDay);
+        Task<MealDayDTO> Map(MealDay mealDay, DateTime date);
     }
 }

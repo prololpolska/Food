@@ -3,6 +3,7 @@ using Core.Domain;
 using System.Threading.Tasks;
 using Infrastrkture.Connections;
 using System;
+using System.Collections.Generic;
 
 namespace Infrastrkture.Repositories
 {
@@ -10,17 +11,18 @@ namespace Infrastrkture.Repositories
     {
         public async Task Add(MealDay mealDay)
         {
-            throw new NotImplementedException();
+            var addMealDay = new AddMealDay();
+            var add = await addMealDay.Add(mealDay.MealId, mealDay.DateId);
+            if(add == 0)
+            {
+                throw new Exception("Błąd połączenia z bazą danych");
+            }
         }
 
-        public async Task<MealDay> Get(DateTime date)
+        public async Task<List<MealDay>> Get(int dateId)
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task<int> GetId()
-        {
-            throw new NotImplementedException();
+            var getMealDay = new GetMealDay();
+            return await getMealDay.Get(dateId);
         }
     }
 }

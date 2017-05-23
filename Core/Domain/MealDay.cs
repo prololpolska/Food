@@ -12,5 +12,11 @@
             DateId = dateId;
             MealId = mealId;
         }
+
+        public MealDay(int dateId, short mealId)
+        {
+            DateId = dateId;
+            MealId = mealId;
+        }
     }
 }
