@@ -12,7 +12,12 @@
         <div id="diet">
             <form method="post" asp-controller="Home" id="2" name="2">
                 <input type="date" min="@DateTime.UtcNow.Date" maxlength="10" placeholder="rrrr-mm-dd" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" asp-for="Date"/><br /><br />
-                <select asp-for="Meal"></select><br /><br />
+                <select asp-for="Meal">
+                    @foreach(var item in Model.Meals)
+                    {
+                        <option value="@item.Key">@item.Value</option>
+                    }
+                </select><br /><br />
                 <input type="submit" asp-action="AddDiet"/>
             </form>
         </div>

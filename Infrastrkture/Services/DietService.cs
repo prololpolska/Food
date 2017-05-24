@@ -64,9 +64,9 @@ namespace Infrastrkture.Services
             return id;
         }
 
-        public async Task<List<MealDayDTO>> GetDiet()
+        public async Task<List<MealDayDTO>> GetDiet(Dictionary<int, DateTime> p_dates)
         {
-            var dates = await GetDate();
+            var dates = p_dates;
             var list = new List<MealDayDTO>();
             foreach(var item in dates)
             {
@@ -79,7 +79,7 @@ namespace Infrastrkture.Services
             return list;
         }
 
-        public async Task<Dictionary<int, string>> GetMeals()
+        public async Task<Dictionary<short, string>> GetMeals()
         {
             var getMeals = new GetMeal();
             return await getMeals.Get();

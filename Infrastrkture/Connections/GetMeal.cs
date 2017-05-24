@@ -8,9 +8,9 @@ namespace Infrastrkture.Connections
 {
     class GetMeal : BaseConnect
     {
-        public async Task<Dictionary<int, string>> Get()
+        public async Task<Dictionary<short, string>> Get()
         {
-            Dictionary<int, string> pair = new Dictionary<int, string>();
+            Dictionary<short, string> pair = new Dictionary<short, string>();
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();

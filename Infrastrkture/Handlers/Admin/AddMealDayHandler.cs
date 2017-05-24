@@ -14,8 +14,8 @@ namespace Infrastrkture.Handlers.Admin
         }
         public async Task Handle(AddMealDay command)
         {
-            var DateId = _dietService.GetDateId(command.Date);
-            await _dietService.AddDiet(command.MealId, await DateId);
+            var DateId = await _dietService.GetDateId(command.Date);
+            await _dietService.AddDiet(command.MealId, DateId);
         }
     }
 }

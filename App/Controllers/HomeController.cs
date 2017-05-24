@@ -6,7 +6,9 @@ using Infrastrkture.Commands.Accounts;
 using Infrastructure.DTO;
 using App.Models;
 using Microsoft.Extensions.Caching.Memory;
-using System;
+using Infrastrkture.Commands.Admin;
+using System.Collections.Generic;
+using Infrastrkture.Commands.User;
 
 namespace App.Controllers
 {
@@ -52,6 +54,7 @@ namespace App.Controllers
             ForwardingModel forwardingModel = new ForwardingModel();
             forwardingModel.Input = "Index";
             await _CommandDispatcher.Dispatch(new GetAccount(Model.Email, Model.Password));
+            await _CommandDispatcher.Dispatch(new GetMeal());
             currentUser = _memoryCache.Get<AccountDTO>("accountDto");
             if (currentUser != null)
             {
@@ -71,6 +74,7 @@ namespace App.Controllers
             if (Model.CheckBoxR)
             {
                 await _CommandDispatcher.Dispatch(new AddAccount(Model.UserNameR, Model.EmailR, Model.PasswordR));
+                await _CommandDispatcher.Dispatch(new GetMeal());
                 currentUser = _memoryCache.Get<AccountDTO>("accountDto");
                 if(currentUser != null)
                 {
@@ -131,14 +135,16 @@ namespace App.Controllers
             {
                 return StatusCode(403);
             }
-            return View();
+            var model = new AdminModel();
+            model.Meals = _memoryCache.Get<Dictionary<short, string>>("meals");
+            return View(model);
         }
 
         public async Task<IActionResult> AddMeal(AdminModel Model)
         {
             ViewData.Add("sharedModel.accountOrLogin", _sharedModel.accountOrLogin);
             ViewData.Add("sharedModel.accountOrLoginTarget", _sharedModel.accountOrLoginTarget);
-            //await _CommandDispatcher.Dispatch();
+            await _CommandDispatcher.Dispatch(new AddMeal(Model.AddMeal));
             return View();
         }
 
@@ -147,7 +153,7 @@ namespace App.Controllers
             ViewData.Add("sharedModel.accountOrLogin", _sharedModel.accountOrLogin);
             ViewData.Add("sharedModel.accountOrLoginTarget", _sharedModel.accountOrLoginTarget);
             
-            //await _CommandDispatcher.Dispatch();
+            await _CommandDispatcher.Dispatch(new AddMealDay(Model.Meal, Model.Date));
             return View();
         }
     }

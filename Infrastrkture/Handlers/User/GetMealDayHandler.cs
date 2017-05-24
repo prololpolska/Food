@@ -3,6 +3,7 @@ using Infrastrkture.Commands.User;
 using Infrastrkture.Services;
 using Microsoft.Extensions.Caching.Memory;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Infrastrkture.Handlers.User
@@ -19,7 +20,10 @@ namespace Infrastrkture.Handlers.User
         }
         public async Task Handle(GetMeal command)
         {
-            throw new NotImplementedException();
+            var dates = await _dietService.GetDate();
+            var diets = await _dietService.GetDiet(dates);
+            _memoryCache.Set("dates", dates, TimeSpan.FromMinutes(5));
+            _memoryCache.Set("diets", diets, TimeSpan.FromMinutes(5));
         }
     }
 }
