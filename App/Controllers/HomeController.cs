@@ -9,6 +9,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Infrastrkture.Commands.Admin;
 using System.Collections.Generic;
 using Infrastrkture.Commands.User;
+using Infrastrkture.DTO;
 
 namespace App.Controllers
 {
@@ -54,6 +55,7 @@ namespace App.Controllers
             ForwardingModel forwardingModel = new ForwardingModel();
             forwardingModel.Input = "Index";
             await _CommandDispatcher.Dispatch(new GetAccount(Model.Email, Model.Password));
+            await _CommandDispatcher.Dispatch(new GetMealDay());
             await _CommandDispatcher.Dispatch(new GetMeal());
             currentUser = _memoryCache.Get<AccountDTO>("accountDto");
             if (currentUser != null)
@@ -74,6 +76,7 @@ namespace App.Controllers
             if (Model.CheckBoxR)
             {
                 await _CommandDispatcher.Dispatch(new AddAccount(Model.UserNameR, Model.EmailR, Model.PasswordR));
+                await _CommandDispatcher.Dispatch(new GetMealDay());
                 await _CommandDispatcher.Dispatch(new GetMeal());
                 currentUser = _memoryCache.Get<AccountDTO>("accountDto");
                 if(currentUser != null)
@@ -91,7 +94,12 @@ namespace App.Controllers
             ViewData.Add("sharedModel.accountOrLogin", _sharedModel.accountOrLogin);
             ViewData.Add("sharedModel.accountOrLoginTarget", _sharedModel.accountOrLoginTarget);
             currentUser = _memoryCache.Get<AccountDTO>("accountDto");
-            if(currentUser == null)
+            if(_memoryCache.Get("meals") == null || _memoryCache.Get("dates") == null || _memoryCache.Get("diets") == null)
+            {
+                await _CommandDispatcher.Dispatch(new GetMealDay());
+                await _CommandDispatcher.Dispatch(new GetMeal());
+            }
+            if (currentUser == null)
             {
                 return StatusCode(403);
             }
@@ -107,7 +115,11 @@ namespace App.Controllers
                 ViewData.Add("accountRole.info", "Kup dietę");
             }
             ViewData["Message"] = $"Witaj {currentUser.UserName}";
-            return View();
+            var model = new AccountModel();
+            model.MealDay = _memoryCache.Get<List<MealDayDTO>>("diets");
+            model.Dates = _memoryCache.Get<Dictionary<int, string>>("dates");
+            model.Meals = _memoryCache.Get<Dictionary<short, string>>("meals");
+            return View(model);
         }
 
         public async Task<IActionResult> Buy()

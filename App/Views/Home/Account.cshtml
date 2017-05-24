@@ -1,2 +1,28 @@
-﻿@ViewData["Message"]
-"<a asp-area="" asp-controller="Home" asp-action="@ViewData["accountRole.action"]">@ViewData["accountRole.info"]</a>
+﻿@using App.Models;
+@using Infrastrkture.DTO;
+@using System.Linq;
+@model AccountModel
+<div>
+    @ViewData["Message"]
+    "<a asp-area="" asp-controller="Home" asp-action="@ViewData["accountRole.action"]">@ViewData["accountRole.info"]</a>
+</div>
+<div id="User">
+    @foreach (var item in Model.Dates)
+    {
+        int i = 0;
+        <div class="day">@item.Value</div>
+        <div class="Meals">
+            @foreach (var item1 in Model.MealDay.Where(x => x.DayId.Equals(item.Key)).ToList())
+            {
+                i++;
+                <div class="Meal">@Model.Meals[item1.MealId]</div>
+                if(i < Model.MealDay.Where(x => x.DayId.Equals(item.Key)).ToList().Count)
+                {
+                    <hr />
+                }
+            }
+        </div>
+        <div class="clear"></div>
+        <hr />
+    }
+</div>

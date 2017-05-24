@@ -9,7 +9,7 @@ namespace Infrastrkture.Connections
     {
         public async Task<List<MealDay>> Get(int dateId)
         {
-            List<MealDay> mealDay = null;
+            List<MealDay> mealDay = new List<MealDay>();
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
@@ -22,7 +22,7 @@ namespace Infrastrkture.Connections
                             reader.GetInt64("id"),
                             reader.GetInt32("dayId"),
                             reader.GetInt16("mealId")
-                            ));
+                        ));
                     }
                 }
                 conn.Close();

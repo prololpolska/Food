@@ -21,7 +21,7 @@ namespace Infrastrkture.Handlers.User
         public async Task Handle(GetMeal command)
         {
             var meals = await _dietService.GetMeals();
-            _memoryCache.Set<Dictionary<short, string>>("meals", meals, TimeSpan.FromMinutes(5));
+            _memoryCache.Set("meals", meals, TimeSpan.FromMinutes(5));
         }
     }
 }

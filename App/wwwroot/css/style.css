@@ -114,11 +114,32 @@ textarea {
     top: 0px;
     position: relative;
     left: 0px;
-    display: none;
 }
 #diet {
     position: relative;
     top: 0px;
     position: relative;
     left: 0px;
+    display: none;
+}
+.day {
+    float: left;
+    width:150px;
+    padding:5px;
+}
+.Meals {
+    float: left;
+    width: inherit;
+    padding: 5px;
+}
+.clear{
+    clear:both;
+}
+#User {
+    background: rgba(0, 0, 0, .2);
+    padding-top: 10px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: left;
 }

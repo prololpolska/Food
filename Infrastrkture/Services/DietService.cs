@@ -73,7 +73,7 @@ namespace Infrastrkture.Services
                 var mealDay = await _repository.Get(item.Key);
                 foreach(var item1 in mealDay)
                 {
-                    list.Add(await Map(item1, item.Value));
+                    list.Add(await Map(item1));
                 }
             }
             return list;
@@ -85,11 +85,31 @@ namespace Infrastrkture.Services
             return await getMeals.Get();
         }
 
-        public async Task<MealDayDTO> Map(MealDay mealDay, DateTime date)
+        public async Task<MealDayDTO> Map(MealDay mealDay)
         {
             var mealDayDTO = _mapper.Map<MealDay, MealDayDTO>(mealDay);
-            mealDayDTO.SetDay(date);
+            mealDayDTO.DayId = mealDay.DateId;
             return mealDayDTO;
+        }
+
+        public async Task<Dictionary<int, string>> Map(Dictionary<int, DateTime> date)
+        {
+            var newDate = new Dictionary<int, string>();
+            foreach (var item in date)
+            {
+                newDate.Add(item.Key, Enum.GetName(typeof(MyEnum), (int)item.Value.DayOfWeek));
+            }
+            return newDate;
+        }
+        enum MyEnum
+        {
+            Poniedzialek = 1,
+            Wtorek = 2,
+            Sroda = 3,
+            Czwartek = 4,
+            Piatek = 5,
+            Sobota = 6,
+            Niedziela = 0
         }
     }
 }
