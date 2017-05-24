@@ -29,7 +29,6 @@ create table Accounts
 create table Days
 (
 	id integer not null primary key,
-    nameDay varchar(16) not null,
     dateDay dateTime not null
 );
 
